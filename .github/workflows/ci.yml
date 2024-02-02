@@ -23,5 +23,5 @@ jobs:
           cache: maven
       - name: Test
         run: |
-          .sdlc/ci
           chmod +x .sdlc/*
+          .sdlc/ci
