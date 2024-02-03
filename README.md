@@ -2,7 +2,35 @@
 
 Java library template
 
-To get a Git project into your build:
+## Development
+
+Build:
+
+```
+mvn install
+```
+
+Full check (test and formatting):
+
+```
+mvn verify -Pci
+```
+
+Repair formatting:
+
+```
+mvn -Pfmt
+```
+
+Fast build (skip any check and file generation):
+
+```
+mvn -Pfast
+```
+
+## Usage
+
+To get this project into your build:
 
 Add the JitPack repository to your build file
 

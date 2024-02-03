@@ -122,6 +122,9 @@
         <fmt.check.phase>none</fmt.check.phase>
         <fmt.repair.phase>none</fmt.repair.phase>
       </properties>
+      <build>
+        <defaultGoal>install</defaultGoal>
+      </build>
     </profile>
 
     <profile>
@@ -224,9 +227,9 @@
       <plugin>
         <artifactId>maven-resources-plugin</artifactId>
         <version>3.3.1</version>
-                  <configuration>
-            <propertiesEncoding>UTF-8</propertiesEncoding>
-          </configuration>
+        <configuration>
+          <propertiesEncoding>UTF-8</propertiesEncoding>
+        </configuration>
       </plugin>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>

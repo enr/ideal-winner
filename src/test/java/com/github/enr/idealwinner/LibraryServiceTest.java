@@ -4,10 +4,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
 
-class AppTest {
+class LibraryServiceTest {
 
   @Test
   void test() {
-    assertThat("foo").as("foo").containsIgnoringWhitespaces("foo");
+    LibraryService sut = new LibraryService();
+    assertThat(sut.operate("hello")).as("operate hello").isEqualTo("hello!");
   }
 }

@@ -14,4 +14,4 @@ hash mvn 2>/dev/null || {
   exit 1
 }
 
-mvn --no-transfer-progress --batch-mode --update-snapshots verify
+mvn --no-transfer-progress --batch-mode --update-snapshots verify -Pci
