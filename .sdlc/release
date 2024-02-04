@@ -42,6 +42,7 @@ BASE=$(git merge-base @ "$upstream")
 
 release_suffix=''
 group_id='com.github.enr'
+artifact_id='ideal-winner'
 snapshot_commit_prefix=''
 # snapshot_commit_prefix='[skip ci]'
 
@@ -77,12 +78,12 @@ git_dirty=$(git status --porcelain)
 }
 
 mvn org.codehaus.mojo:versions-maven-plugin:set-property -Dproperty=revision "-DnewVersion=${release_version}"
-mvn org.codehaus.mojo:versions-maven-plugin:set -DgroupId=${group_id} '-DartifactId=*' "-DnewVersion=${release_version}"
+mvn org.codehaus.mojo:versions-maven-plugin:set "-DgroupId=${group_id}" "-DartifactId=${artifact_id}" "-DnewVersion=${release_version}"
 mvn org.codehaus.mojo:versions-maven-plugin:commit
 git commit -a -m "release ${release_version}"
 git tag "${tag_name}"
 mvn org.codehaus.mojo:versions-maven-plugin:set-property -Dproperty=revision "-DnewVersion=${snapshot_version}"
-mvn org.codehaus.mojo:versions-maven-plugin:set -DgroupId=${group_id} '-DartifactId=*' "-DnewVersion=${snapshot_version}"
+mvn org.codehaus.mojo:versions-maven-plugin:set "-DgroupId=${group_id}" "-DartifactId=${artifact_id}" "-DnewVersion=${snapshot_version}"
 mvn org.codehaus.mojo:versions-maven-plugin:commit
 git commit -a -m "${snapshot_commit_prefix} back to snapshot"
 git push
