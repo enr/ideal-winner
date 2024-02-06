@@ -14,6 +14,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>17</maven.compiler.source>
     <maven.compiler.target>17</maven.compiler.target>
+    <build-settings.version>1.2.0</build-settings.version>
   </properties>
 
   <dependencyManagement>
@@ -75,10 +76,11 @@
         <dependency>
           <groupId>com.github.enr</groupId>
           <artifactId>build-settings</artifactId>
-          <version>1.1.0</version>
+          <version>${build-settings.version}</version>
         </dependency>
       </dependencies>
       <build>
+        <defaultGoal>verify</defaultGoal>
         <plugins>
           <plugin>
             <groupId>net.revelc.code.formatter</groupId>
@@ -111,7 +113,7 @@
     </profile>
 
     <profile>
-      <!-- mvn clean install -Pfast -->
+      <!-- mvn -Pfast -->
       <activation>
         <activeByDefault>false</activeByDefault>
       </activation>
@@ -145,7 +147,7 @@
         <dependency>
           <groupId>com.github.enr</groupId>
           <artifactId>build-settings</artifactId>
-          <version>1.1.0</version>
+          <version>${build-settings.version}</version>
         </dependency>
       </dependencies>
       <build>
@@ -196,7 +198,6 @@
     <plugins>
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
-        <version>3.2.5</version>
         <executions>
           <execution>
             <id>default-test</id>
@@ -207,7 +208,6 @@
       <plugin>
         <groupId>io.github.git-commit-id</groupId>
         <artifactId>git-commit-id-maven-plugin</artifactId>
-        <version>7.0.0</version>
         <executions>
           <execution>
             <id>get-the-git-infos</id>
@@ -221,96 +221,106 @@
           </execution>
         </executions>
       </plugin>
-      <plugin>
-        <artifactId>maven-clean-plugin</artifactId>
-        <version>3.3.2</version>
-      </plugin>
-      <plugin>
-        <artifactId>maven-resources-plugin</artifactId>
-        <version>3.3.1</version>
-        <configuration>
-          <propertiesEncoding>UTF-8</propertiesEncoding>
-        </configuration>
-      </plugin>
-      <plugin>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.12.1</version>
-      </plugin>
-      <plugin>
-        <artifactId>maven-jar-plugin</artifactId>
-        <version>3.3.0</version>
-      </plugin>
-      <plugin>
-        <artifactId>maven-install-plugin</artifactId>
-        <version>3.1.1</version>
-      </plugin>
-      <plugin>
-        <artifactId>maven-deploy-plugin</artifactId>
-        <version>3.1.1</version>
-      </plugin>
-      <plugin>
-        <artifactId>maven-javadoc-plugin</artifactId>
-        <version>3.6.3</version>
-      </plugin>
-      <plugin>
-        <artifactId>maven-source-plugin</artifactId>
-        <version>3.3.0</version>
-      </plugin>
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>versions-maven-plugin</artifactId>
-        <version>2.16.2</version>
-      </plugin>
-
-      <plugin>
-        <!-- mvn net.revelc.code.formatter:formatter-maven-plugin:2.23.0:format -->
-        <groupId>net.revelc.code.formatter</groupId>
-        <artifactId>formatter-maven-plugin</artifactId>
-        <version>2.23.0</version>
-        <dependencies>
-          <dependency>
-            <groupId>com.github.enr</groupId>
-            <artifactId>build-settings</artifactId>
-            <version>1.1.0</version>
-          </dependency>
-        </dependencies>
-        <configuration>
-          <!-- paths in build-settings jar -->
-          <configFile>fmt/eclipse-formatter-config.xml</configFile>
-          <configXmlFile>fmt/xml.properties</configXmlFile>
-          <sourceDirectory>.</sourceDirectory>
-          <lineEnding>LF</lineEnding>
-          <includes>
-            <include>**/*.java</include>
-            <include>pom.xml</include>
-            <include>**/pom.xml</include>
-            <include>src/main/resources/*.xml</include>
-            <include>src/test/resources/*.xml</include>
-          </includes>
-          <excludes>
-            <exclude>**/generated-sources/**</exclude>
-            <exclude>**/generated-test-sources/**</exclude>
-          </excludes>
-        </configuration>
-      </plugin>
-      <plugin>
-        <!-- mvn net.revelc.code:impsort-maven-plugin:1.9.0:sort -->
-        <groupId>net.revelc.code</groupId>
-        <artifactId>impsort-maven-plugin</artifactId>
-        <version>1.9.0</version>
-        <configuration>
-          <removeUnused>true</removeUnused>
-          <lineEnding>LF</lineEnding>
-          <groups>java.,javax.,com.,org.,com.github.enr</groups>
-          <staticGroups>java.,javax.,com.,org.,com.github.enr</staticGroups>
-          <compliance>17</compliance>
-          <excludes>
-            <exclude>**/generated-sources/**</exclude>
-            <exclude>**/generated-test-sources/**</exclude>
-          </excludes>
-        </configuration>
-      </plugin>
     </plugins>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>3.2.5</version>
+        </plugin>
+        <plugin>
+          <groupId>io.github.git-commit-id</groupId>
+          <artifactId>git-commit-id-maven-plugin</artifactId>
+          <version>7.0.0</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-clean-plugin</artifactId>
+          <version>3.3.2</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>3.3.1</version>
+          <configuration>
+            <propertiesEncoding>UTF-8</propertiesEncoding>
+          </configuration>
+        </plugin>
+        <plugin>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.12.1</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-jar-plugin</artifactId>
+          <version>3.3.0</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-install-plugin</artifactId>
+          <version>3.1.1</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <version>3.1.1</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-javadoc-plugin</artifactId>
+          <version>3.6.3</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-source-plugin</artifactId>
+          <version>3.3.0</version>
+        </plugin>
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>versions-maven-plugin</artifactId>
+          <version>2.16.2</version>
+        </plugin>
+        <plugin>
+          <groupId>net.revelc.code.formatter</groupId>
+          <artifactId>formatter-maven-plugin</artifactId>
+          <version>2.23.0</version>
+          <dependencies>
+            <dependency>
+              <groupId>com.github.enr</groupId>
+              <artifactId>build-settings</artifactId>
+              <version>1.1.0</version>
+            </dependency>
+          </dependencies>
+          <configuration>
+            <!-- paths in build-settings jar -->
+            <configFile>fmt/eclipse-formatter-config.xml</configFile>
+            <configXmlFile>fmt/xml.properties</configXmlFile>
+            <sourceDirectory>.</sourceDirectory>
+            <lineEnding>LF</lineEnding>
+            <includes>
+              <include>**/*.java</include>
+              <include>pom.xml</include>
+              <include>**/pom.xml</include>
+              <include>src/main/resources/*.xml</include>
+              <include>src/test/resources/*.xml</include>
+            </includes>
+            <excludes>
+              <exclude>**/generated-sources/**</exclude>
+              <exclude>**/generated-test-sources/**</exclude>
+            </excludes>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>net.revelc.code</groupId>
+          <artifactId>impsort-maven-plugin</artifactId>
+          <version>1.9.0</version>
+          <configuration>
+            <removeUnused>true</removeUnused>
+            <lineEnding>LF</lineEnding>
+            <groups>java.,javax.,com.,org.,com.github.enr</groups>
+            <staticGroups>java.,javax.,com.,org.,com.github.enr</staticGroups>
+            <compliance>17</compliance>
+            <excludes>
+              <exclude>**/generated-sources/**</exclude>
+              <exclude>**/generated-test-sources/**</exclude>
+            </excludes>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
   </build>
 
   <repositories>

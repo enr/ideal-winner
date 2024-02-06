@@ -1,5 +1,9 @@
 # ideal-winner
 
+![CI](https://github.com/enr/ideal-winner/workflows/CI/badge.svg)
+
+[![](https://jitpack.io/v/enr/ideal-winner.svg)](https://jitpack.io/#enr/ideal-winner)
+
 Java library template
 
 ## Development
@@ -13,7 +17,7 @@ mvn install
 Full check (test and formatting):
 
 ```
-mvn verify -Pci
+mvn -Pci
 ```
 
 Repair formatting:
@@ -49,6 +53,6 @@ Add the dependency
 <dependency>
     <groupId>com.github.enr</groupId>
     <artifactId>ideal-winner</artifactId>
-    <version>0.1.0</version>
+    <version>${idealwinner.version}</version>
 </dependency>
 ```
