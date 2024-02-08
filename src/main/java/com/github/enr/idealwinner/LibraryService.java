@@ -12,6 +12,9 @@ public class LibraryService {
    * @return the input!
    */
   public String operate(String input) {
+    if (input == null) {
+      return "null value";
+    }
     return "%s!".formatted(input);
   }
 }
