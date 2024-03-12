@@ -293,6 +293,8 @@
             <phase>${buildinfo.generate.phase}</phase>
             <configuration>
               <skip>${buildinfo.skip}</skip>
+              <failOnNoGitDirectory>false</failOnNoGitDirectory>
+              <failOnUnableToExtractRepoInfo>false</failOnUnableToExtractRepoInfo>
             </configuration>
           </execution>
         </executions>
@@ -307,7 +309,7 @@
         <plugin>
           <groupId>io.github.git-commit-id</groupId>
           <artifactId>git-commit-id-maven-plugin</artifactId>
-          <version>7.0.0</version>
+          <version>8.0.1</version>
         </plugin>
         <plugin>
           <artifactId>maven-clean-plugin</artifactId>
